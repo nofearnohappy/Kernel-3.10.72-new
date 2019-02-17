@@ -1,8 +1,6 @@
 # Custom kernel for Xiaomi Redmi Note 2 (Hermes and Hennesy)
 # Kernel version 3.10.72
 # Vendor Vanzo (ALPS-MP-M0.MP11-V1_VZ6795_LWT_M)
-# Supports miui library
-# dispsys,videox,cmdq,m4u,jpeg,smi,gpu *** taken from the original kernel temporarily
 =========================================================================
 * Works:
 	* LCM
