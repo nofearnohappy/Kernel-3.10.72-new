@@ -39,13 +39,6 @@
 /******************************************************************************
  * Debug configuration
 ******************************************************************************/
-// availible parameter
-// ANDROID_LOG_ASSERT
-// ANDROID_LOG_ERROR
-// ANDROID_LOG_WARNING
-// ANDROID_LOG_INFO
-// ANDROID_LOG_DEBUG
-// ANDROID_LOG_VERBOSE
 #define TAG_NAME "leds_strobe.c"
 #define PK_DBG_NONE(fmt, arg...)    do {} while (0)
 #define PK_DBG_FUNC(fmt, arg...)    xlog_printk(ANDROID_LOG_ERROR  , TAG_NAME, KERN_INFO  "%s: " fmt, __FUNCTION__ ,##arg)
@@ -98,38 +91,18 @@ static struct work_struct workTimeOut;
 /*****************************************************************************
 Functions
 *****************************************************************************/
-
-
-    /*CAMERA-FLASH-EN */
-
-
 extern int iWriteRegI2C(u8 *a_pSendData , u16 a_sizeSendData, u16 i2cId);
 extern int iReadRegI2C(u8 *a_pSendData , u16 a_sizeSendData, u8 * a_pRecvData, u16 a_sizeRecvData, u16 i2cId);
 static void work_timeOutFunc(struct work_struct *data);
 
-
-
-
-
-
-
-
-
-
-
-
-
-#if 0  //defined(SLT_DRV_W8660_CONFIG)
 int FL_Enable(void)
 {
-
-	//mt_set_gpio_out(GPIO_CAMERA_FLASH_MODE_PIN,GPIO_OUT_ZERO);
 	mt_set_gpio_out(GPIO_CAMERA_FLASH_EN_PIN,GPIO_OUT_ONE);
-	PK_DBG(" FL_Enable line=%d\n",__LINE__);
-
-    return 0;
+	PK_DBG("FL_Enable line=%d\n",__LINE__);	
+	return 0;
 }
-#else
+
+/*
 int FL_Enable(void)
 {
 	if(g_duty!=0)
@@ -147,8 +120,7 @@ int FL_Enable(void)
 
     return 0;
 }
-#endif
-
+*/
 int FL_Disable(void)
 {
 
@@ -221,7 +193,6 @@ static void work_timeOutFunc(struct work_struct *data)
 {
     FL_Disable();
     PK_DBG("ledTimeOut_callback\n");
-    //printk(KERN_ALERT "work handler function./n");
 }
 
 
@@ -263,10 +234,10 @@ static int constant_flashlight_ioctl(MUINT32 cmd, MUINT32 arg)
 
     	case FLASH_IOC_SET_DUTY :
     		PK_DBG("FLASHLIGHT_DUTY: %d\n",arg);
-			//if (arg == 1)
-			//	FL_Flash_Mode();
-			//else
-			//	FL_Torch_Mode();
+//			if (arg == 1)
+//				FL_Flash_Mode();
+//		        else
+//				FL_Torch_Mode();
     		FL_dim_duty(arg);
     		break;
 
